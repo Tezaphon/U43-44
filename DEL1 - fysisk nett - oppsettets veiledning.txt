@@ -1,0 +1,48 @@
+1) Koble alt sammen
+	Brukt 3 st. kabler.
+	Fra end devices til swithcen brukte jeg hvite kabler.
+	Fra laptopen (CLIENT01) går i port 4 på swithcen (SW1)
+	Fra PCen (SERVER01) går i port 3 på switchen (SW1)
+	For å koble switch og ruteren (R1) brukte jeg den gule.
+	Fra switchen (SW1) går i port 1 på ruteren (R1)
+	
+2) Konfigurere IPer, Subnet, Gateway, DHCP
+	SERVER01 skal ha statisk IP, den settes manuelt
+	CLIENT01 - dynamisc IP, den henter den fra R1 sin DHCP
+	Skrevet ned instillingene (se i README.md) på forhånd
+	Gikk først til ruteren (R1) sin instillinssiden gjennom browser. Vanligvis adressen er "192.168.0.1" eller "tplinkwifi.net".
+	Jeg hadde en nettverk fra før med andre ruter instillingene, så måtte trykke reset på ruteren.
+	
+	Login, passord til ruteren er på undersiden.
+	Gå til "LAN" å skriv inn local IPen, subnet og annet.
+	Den skal kaste deg ut fra nettsiden. Nå trenger vi sette instillingene for SERVER01. Gå i settings-Ethernet
+	Deretter gå tilbake til ruteren og sett instillingene for DHCP.
+	
+	Nå, på laptopen (CLIENT01) vi sjekker om setting-Ethernet står i automatisk. Dersom ikke - sett den på automatisk.
+	CLIENT01 skal hente IPconfigen sin fra R1.
+
+3) Teste nettverket med "ping"
+	På SERVER01:
+		Ledetekst- "ipconfig"
+		Skal vise ipconfigen til SERVER01
+		Den vi vet fra før, fordi vi satte den selv
+	På CLIENT01:
+		Ledetekst- "ipconfig"
+		Skal vise ipconfigen til CLIENT01
+		Den er hentet automatisk
+		Kjør da "ping 'SERVER01 sin ipaddress'"
+		Må vise at det er kobling til SERVER01 og ulike data.
+		
+	På SERVER01:
+		Ledetekst- "ping 'CLIENT01 sin ipaddress'"
+		Må vise at det er kobling til CLIENT01.
+		
+4) Dele mappen fra SERVER01
+	Den mappen på SERVER01 som skal deles -> høyre klikk -> "properties"->"share". Den skal vise adressen til den delte mappen. Hust den, skriv ned
+	På CLIENT01 "Denne PC"-> inne i den høyreklikk-> "Legg til ny nettverksplassering"->skriv inn den adressen-> nå fikk vi en shortcut til den mappen.
+	I mitt tilfellen den også spurte om login/passord til SERVER01
+	
+	Denne måten har problemer, siden: 
+								1) Den spører om login/passord til SERVER01
+								2) Den trenger i vite adressen til mappen på forhånd
+	
