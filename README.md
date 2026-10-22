@@ -52,3 +52,4 @@ Mappen SERVER01 - C:\U4344  er delt til CLIENT01 og lenken er laget i CLIENT01 C
 DEL 2 - PACKET TRACER NETT
 ==========================
 
+Nettverket skal minst ha to rutere, fire switcher, tre klientnett, eget servernett, minst én server, forbindelse mellom ruterne, DHCP, DNS og HTTP. 
