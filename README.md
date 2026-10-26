@@ -55,7 +55,20 @@ DEL 2 - PACKET TRACER NETT
 Nettverket skal minst ha to rutere, fire switcher, tre klientnett, eget servernett, minst én server, forbindelse mellom ruterne, DHCP, DNS og HTTP. 
 
 Min nettverk inneholder: 12 PCer, 4 switcher, 3 servere, 2 rutere, 1 printer. Se i "Bilder" mappen -> "DEL2 Struktur"
-	Ruter HOVEDKONT-R2, DHCP = ON:
-		ADMINIST-SW -> PC5-7 har automatiske IPconfig ON.		Nettverk: 192.168.2.0/24 Gateway: 192.168.2.1
-		SUPPORT-SW -> PC0-4 har automatiske IPconfig ON. 		Nettverk: 192.168.3.0/24 Gateway: 192.168.3.1
-		SERVERE-SW -> Server0-2 har automatiske IPconfig ON.	Nettverk: 192.168.1.0/24 Gateway: 192.168.1.1
+	Ruter HOVEDKON-R2, DHCP = ON (se i "HOVEDKON-R2 DHCP" bildet):
+		ADMINIST-SW -> PC5-7 har automatiske IPconfig ON.		Nettverk: 192.168.2.0/24 Gateway: 192.168.2.1 DNS: 192.168.1.2 (Pool ADM)
+		SUPPORT-SW -> PC0-4 har automatiske IPconfig ON. 		Nettverk: 192.168.3.0/24 Gateway: 192.168.3.1 DNS: 192.168.1.2 (Pool SUP)
+		SERVERE-SW -> Server0-2 har automatiske IPconfig ON.	Nettverk: 192.168.1.0/24 Gateway: 192.168.1.1 DNS: 192.168.1.2 (Pool SEV)
+		
+	Ruter SALGSAVD-R1, DHCP = ON (se i "SALGSAVD-R1 DHCP" bildet):
+		SALGSAVD-SW -> PC8-11 har automatisk IPconfig ON. 		Nettverk: 192.168.255.0/24 Gateway: 192.168.255.1 DNS: 192.168.1.2 (Pool SAL)
+		
+Kobling mellom HOVEDKON-R2 og SALGSAVD-R1 skjer gjennom nettverket 192.168.50.0/24.
+
+OSPF er configurert på begge ruterne. OSPF gjør det mulig for ruterne å vite hvor ligger nettverk bak andre ruterne.
+Se i "Bilder" mappe for instillingene: "HOVEDKON-R2 OSPF", "SALGSAVD-R1 OSPF".
+
+På "Server0" configurert DNS og HTTP. IP addressen til "Server0" derfor brukes for DHCP configurering hos R1 og R2.
+Man kan skrive "192.168.1.2" eller "localnett.fjordkraft.local" for å nå nettsiden som ligger på "Server0".
+
+Tracert tester ligger i "Bilder/DEL2" mappen.
