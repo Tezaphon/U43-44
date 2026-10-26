@@ -53,3 +53,9 @@ DEL 2 - PACKET TRACER NETT
 ==========================
 
 Nettverket skal minst ha to rutere, fire switcher, tre klientnett, eget servernett, minst én server, forbindelse mellom ruterne, DHCP, DNS og HTTP. 
+
+Min nettverk inneholder: 12 PCer, 4 switcher, 3 servere, 2 rutere, 1 printer. Se i "Bilder" mappen -> "DEL2 Struktur"
+	Ruter HOVEDKONT-R2, DHCP = ON:
+		ADMINIST-SW -> PC5-7 har automatiske IPconfig ON.		Nettverk: 192.168.2.0/24 Gateway: 192.168.2.1
+		SUPPORT-SW -> PC0-4 har automatiske IPconfig ON. 		Nettverk: 192.168.3.0/24 Gateway: 192.168.3.1
+		SERVERE-SW -> Server0-2 har automatiske IPconfig ON.	Nettverk: 192.168.1.0/24 Gateway: 192.168.1.1
