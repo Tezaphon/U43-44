@@ -1,7 +1,9 @@
 Alle bilder/diagrammer ligger i "Bilder" mappen
 
+=======================
+DEL 1 - FYSISK NETTVERK
+=======================
 
-Del 1 - Fysisk nettverk
 Logisk struktur:
 
 Ruter - Switch - [SERVER01, CLIENT01]
@@ -14,11 +16,6 @@ SERVER01, CLIENT01 - kan kommunisere med hverandre
 SERVER01 - fast IP addresse
 CLIENT01 - IP addresse fra DHCP
 CLIENT01 - bruker minst en tjeneste fra SERVER01
-
-
-=======================
-DEL 1 - FYSISK NETTVERK
-=======================
 
 Oppgaven er å lage en fysisk nettverk som består av to PC enheter (SERVER01, CLIENT01) som er koblet til ruter (R1) gjennom en switch (SW1).
 Enhetene i nettverket skal: ha kommunikasjon med hverandre, det blir delt en mappe fra SERVER01.
@@ -66,9 +63,9 @@ Min nettverk inneholder: 12 PCer, 4 switcher, 3 servere, 2 rutere, 1 printer. Se
 Kobling mellom HOVEDKON-R2 og SALGSAVD-R1 skjer gjennom nettverket 192.168.50.0/24.
 
 OSPF er configurert på begge ruterne. OSPF gjør det mulig for ruterne å vite hvor ligger nettverk bak andre ruterne.
-Se i "Bilder" mappe for instillingene: "HOVEDKON-R2 OSPF", "SALGSAVD-R1 OSPF".
+Se i "Bilder" mappe for instillingene: "HOVEDKON-R2 IP og OSPF", "SALGSAVD-R1 IP og OSPF".
 
-På "Server0" configurert DNS og HTTP. IP addressen til "Server0" derfor brukes for DHCP configurering hos R1 og R2.
+På "Server0" configurert DNS og HTTP. Den har statisk IP (i motsetning til resten av servere). IP addressen til "Server0" derfor brukes for DHCP configurering hos R1 og R2.
 Man kan skrive "192.168.1.2" eller "localnett.fjordkraft.local" for å nå nettsiden som ligger på "Server0".
 
 Tracert tester ligger i "Bilder/DEL2" mappen.

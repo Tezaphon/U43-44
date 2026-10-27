@@ -1,0 +1,57 @@
+1) Legge til enheter, sette inn nodvendige moduler og koble alt sammen
+	Jeg brukte: 12 "PC-PT"  de kommer med "PT-HOST-NM-1CFE" Ethernet modul hver, 
+				3 "Server-PT" de også kommer "PT-HOST-NM-1CFE" preinstallert ,
+				4 "Switch-PT-Empty" - det finnes modeller med preinstallerte moduler. Jeg gikk for "Empty" for å sette moduler på den måten jeg ønsker
+				2 "Router-PT-Empty" - samme som for "Switch-PT-Empty".
+				
+	Jeg brukte bare "Copper Straight-Through" kobling.
+	
+	Det finnes hovedkontoret og salgsavdeling. En ruter står i hvert. 
+	Hovedkontoret deretter brytes ned til: administrasjon, support, server. Hver av dem samles med en switch som er koblet til ruter.
+	Tilsammen i hovedkontoret: 1 ruter, 3 switch, 8 PC, 3 server.
+	I salgsavdeling finnes det bare en avdeling og der brukes bare en switch.
+	Tilsammen i salgsavdeling: 4 PC, 1 switch.
+	
+2) Configurere alt. Statiske IP, DHCP, DNS, HTTP.
+	Først setter vi statiske IP på ruterne. 
+	Rutere har mange Ethernet utganger og hvert av dem danner sin egen nettverk, trenger en statisk IP (som blir en gateway for enhetene i nettverket)
+	Man kan configurere dem med å trykke på enhet->config eller CLI.
+	Hos config ham kan bare sette inn IPer, øvrige ting som DHCP, OSPF må settes gjennom CLI.
+	I ruternes CLI bruk kommandoer som: "?" - viser commandoer og deres beskrivelse. Bruk sammen, etter andre kommandoer for å se varianter. 
+										"config ?" - skal vise varianter som kan brukes etter "config".
+										"config" - går inn på å konfigurere enhet.
+										"show" - vise ulik informasjon om enhet.
+	For å setter f. eks. DHCP bruk kommandoer:
+	"enable"
+	"config terminal"
+	"ip dhcp pool <skriv inn navn på dhcp pool>"
+	"excluded-address <ip adressen som skal ikke tildeles (f eks gateway address)>" (det også skal excluderes Ip address til vår DNS Server0fordi den skal ha statisk IP)
+	"network <nettverk address> <network mask>"
+	"default-router <ip til gateway>"
+	"dns-server <ip til dns server>" (PCene skal kunne se nettsiden som ligger på Server0, så bruker vi Server0 sin IP addresse her)
+	"exit"
+	I tilkoblete enheter sjekk for at IP config står på DHCP.
+	
+	DNS og HTTP kan konfigureres på Server-PT gjennom Config feltet.
+	For å gjore det mulig å koble til nettsiden, i DNS skal det lages en "Record" med variabler: Name: "intranett.fjordtek.local"; Address: "192.168.1.2"; 
+	
+	I startpunktet HOVEDKON-R2 kan ikke se nettverket som ligger bak SALGSAVD-R1. For at PCene i f.eks. administrasjon (ADM), ser PCene i salgsavdeling (SAL), må det configureres noe form for ruting.
+	Jeg brukte OSPF - OPEN SHORTEST PATH FIRST. Det funkem med å danne "area" og koble dem alle til en "backbone area 0". Den alt configureres i ruter (R1, R2).
+	Skriv inn komandoer for å sette inn OSPF:
+	"config terminal"
+	"router ospf <process ID>"
+	"network <IP addresse til nettverket med end devices> <subnet mask> area <area nummer>"
+	"network <IP addresse til intermediate/backbone devices> <subnet mask> area 0"
+	"exit"
+	Dette må gjøres på begge ruterne.
+	
+	
+	
+3) Teste nettverket.
+	For å sjekke tilkobling vi kan gå inn på en av end devices-> Desktop->command prompt og bruke "ping" "tracert" commandoer. "ipconfig /all" for ip instillingene.
+	Ping bare viser at enhetene er koblet. Tracert skal også vise enhetene innimelllom enhetene (f.eks. ruternes IPer).
+	
+	Vi kan sjekke tilgangen til nettsiden med å klikke på en av end devices->Desktop->Web Browser-> i addressefeltet "intranett.fjordtek.local".
+	Den skal vise en nettside. Vi vet at den er fra Server0 med å gå på "A Small Page".
+	
+	
