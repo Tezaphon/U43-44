@@ -72,3 +72,4 @@ Tracert tester ligger i "Bilder/DEL2" mappen.
 
 Det ble også opprettet en telnet kobling fra PC1 til R2. Se i "Bilder/DEL2" for "HOVEDKON-R2 vty telnet setup", "HOVEDKON-R2 vty telnet password".
 Telnet ble videre brukt for å vise info fra R2 på PC1. Se i "PC1 telnet connection", "PC1 telnet R2 dhcp info"
+Telnet også funker gjennom adre rutere (f.eks. info om R2 kan sees på PC10).
