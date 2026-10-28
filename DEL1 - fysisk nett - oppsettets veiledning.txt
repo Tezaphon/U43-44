@@ -43,6 +43,6 @@
 	I mitt tilfellen den også spurte om login/passord til SERVER01
 	
 	Denne måten har problemer, siden: 
-								1) Den spører om login/passord til SERVER01
+								1) Den spører om login/passord til SERVER01 (Login: guest; Passord: <ingenting>)
 								2) Den trenger å vite adressen til mappen på forhånd
 	

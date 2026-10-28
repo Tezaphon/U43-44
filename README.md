@@ -44,7 +44,7 @@ Resultater til ping tester ligger i "Bilder" mappen: "ping CLIENT01 til SERVER01
 
 Mappen SERVER01 - C:\U4344  er delt til CLIENT01 og lenken er laget i CLIENT01 C:\u4344shared
 (Det er noe problemet med å bare gå gjennom "Network\DC01 (SERVER01)". Man kan koble til mappen med å taste "\\10.15.50.51\u4344shared" men ikke med bruk av SERVER01 sin navn. DNS problemet? Sjekket services.msc, instillingene hos SERVE01. Funnet at noe ble slått av, med det hjulpet ikke)
-
+Den trenger login/passord. Det laget en "Guest" på Server01. Bruk: Login - guest; Passord - <ingenting>
 ==========================
 DEL 2 - PACKET TRACER NETT
 ==========================
@@ -69,3 +69,6 @@ På "Server0" configurert DNS og HTTP. Den har statisk IP (i motsetning til rest
 Man kan skrive "192.168.1.2" eller "localnett.fjordkraft.local" for å nå nettsiden som ligger på "Server0".
 
 Tracert tester ligger i "Bilder/DEL2" mappen.
+
+Det ble også opprettet en telnet kobling fra PC1 til R2. Se i "Bilder/DEL2" for "HOVEDKON-R2 vty telnet setup", "HOVEDKON-R2 vty telnet password".
+Telnet ble videre brukt for å vise info fra R2 på PC1. Se i "PC1 telnet connection", "PC1 telnet R2 dhcp info"
