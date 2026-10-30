@@ -17,6 +17,8 @@ SERVER01 - fast IP addresse
 CLIENT01 - IP addresse fra DHCP
 CLIENT01 - bruker minst en tjeneste fra SERVER01
 
+DHCP trengs for å at ruter kan automatisk gi enhetene i nettverket nettverksinsillingene.
+
 Oppgaven er å lage en fysisk nettverk som består av to PC enheter (SERVER01, CLIENT01) som er koblet til ruter (R1) gjennom en switch (SW1).
 Enhetene i nettverket skal: ha kommunikasjon med hverandre, det blir delt en mappe fra SERVER01.
 Strukturen og IP configer er vist in en diagram "DEL1-fysisk nettverk"
@@ -40,16 +42,20 @@ SERVER01 (se i "SERVER01 ipconfig") - STATISK IP config (verdiene er satt manuae
 	Subnet- 255.255.255.0
 	Gateway- 10.15.50.100
 
-Resultater til ping tester ligger i "Bilder" mappen: "ping CLIENT01 til SERVER01", "ping SERVER01 til CLIENT01"
+Resultater til ping tester ligger i "Bilder" mappen: "ping CLIENT01 til SERVER01", "ping SERVER01 til CLIENT01". Ping viser bare at den finnes destinasjonen.
 
 Mappen SERVER01 - C:\U4344  er delt til CLIENT01 og lenken er laget i CLIENT01 C:\u4344shared
 (Det er noe problemet med å bare gå gjennom "Network\DC01 (SERVER01)". Man kan koble til mappen med å taste "\\10.15.50.51\u4344shared" men ikke med bruk av SERVER01 sin navn. DNS problemet? Sjekket services.msc, instillingene hos SERVE01. Funnet at noe ble slått av, med det hjulpet ikke)
-Den trenger login/passord. Det laget en "Guest" på Server01. Bruk: Login - guest; Passord - <ingenting>
+Den trenger login/passord. Det laget en "Guest" på Server01 som kan brukes for å nå mappen. Bruk: Login - guest; Passord - <ingenting>
 ==========================
 DEL 2 - PACKET TRACER NETT
 ==========================
 
-Nettverket skal minst ha to rutere, fire switcher, tre klientnett, eget servernett, minst én server, forbindelse mellom ruterne, DHCP, DNS og HTTP. 
+Nettverket skal minst ha to rutere, fire switcher, tre klientnett, eget servernett, minst én server, forbindelse mellom ruterne, DHCP, DNS og HTTP.
+
+DHCP - automtisk tildeling av nettverksinstinningene for enhetene i nettverket.
+DNS - for at istedenfor at man trennger å skrive "192.168.1.2" i browseren, man kunne skrive "intranett.fjordtek.local".
+HTTP - vise nettsider.
 
 Min nettverk inneholder: 12 PCer, 4 switcher, 3 servere, 2 rutere, 1 printer. Se i "Bilder" mappen -> "DEL2 Struktur"
 	Ruter HOVEDKON-R2, DHCP = ON (se i "HOVEDKON-R2 DHCP" bildet):
@@ -62,14 +68,16 @@ Min nettverk inneholder: 12 PCer, 4 switcher, 3 servere, 2 rutere, 1 printer. Se
 		
 Kobling mellom HOVEDKON-R2 og SALGSAVD-R1 skjer gjennom nettverket 192.168.50.0/24.
 
-OSPF er configurert på begge ruterne. OSPF gjør det mulig for ruterne å vite hvor ligger nettverk bak andre ruterne.
+OSPF (Open Short Path First) er configurert på begge ruterne. OSPF er en måte for ruterne å "snakke" med hverandre om nettverkene som de har (routing).
 Se i "Bilder" mappe for instillingene: "HOVEDKON-R2 IP og OSPF", "SALGSAVD-R1 IP og OSPF".
 
 På "Server0" configurert DNS og HTTP. Den har statisk IP (i motsetning til resten av servere). IP addressen til "Server0" derfor brukes for DHCP configurering hos R1 og R2.
 Man kan skrive "192.168.1.2" eller "localnett.fjordkraft.local" for å nå nettsiden som ligger på "Server0".
 
-Tracert tester ligger i "Bilder/DEL2" mappen.
+Tracert tester ligger i "Bilder/DEL2" mappen. Tracert testene viser alle stegene før packeten når målet.
 
 Det ble også opprettet en telnet kobling fra PC1 til R2. Se i "Bilder/DEL2" for "HOVEDKON-R2 vty telnet setup", "HOVEDKON-R2 vty telnet password".
+Telnet gjør det mulig å fjernstyre datamskiner gjennom kommandolinjen.
 Telnet ble videre brukt for å vise info fra R2 på PC1. Se i "PC1 telnet connection", "PC1 telnet R2 dhcp info"
 Telnet også funker gjennom adre rutere (f.eks. info om R2 kan sees på PC10).
+Telnet er ukryptert, derfor bør man bruke ssh (samme funktionalitet, men kryptert).
